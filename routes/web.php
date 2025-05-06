@@ -13,12 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/{any?}', function () {
     return view('welcome');
-});
-
-Route::get('/about', function () {
-    return view('about');
-});
+})->where('any', '.*');
 
 // Create additional Routes below
