@@ -3,10 +3,10 @@
 </script>
 
 <template>
-    <footer class="bg-light py-3">
-        <div class="container">
-            Copyright &copy; 2025, DanielFKBOps ✨
-        </div>
+    <footer class="py-4 bg-dark text-white text-center">
+      <div class="container">
+        <p class="mb-0">© 2025 Island Photo. All rights reserved.</p>
+      </div>
     </footer>
 </template>
 

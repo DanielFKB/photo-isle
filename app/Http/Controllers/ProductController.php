@@ -15,5 +15,11 @@ class ProductController extends Controller
         'data' => $featuredProducts
         ]);
     }
+    public function index() {
+        $products = Product::all();
+        return response()->json(['products' => $products]);
+    }
+
+
     
 }
