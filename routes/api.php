@@ -15,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/featured-products', [ProductController::class, 'featured']);
+Route::get('v1/featured-products', [ProductController::class, 'featured']);
+Route::get('v1/products', [ProductController::class, 'index']);
+

@@ -1,0 +1,36 @@
+/* resources/css/app.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  background-image: url('../images/island photo logo_v2.png');
+  background-size: 60%;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(248, 250, 252, 0.92);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}

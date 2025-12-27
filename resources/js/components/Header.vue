@@ -10,10 +10,11 @@ import logo from "../../images/island photo logo copy.jpg"; // Update this path 
         </a>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <RouterLink class="nav-link" :class="{ active: $route.path === '/'}" to="/">Home</RouterLink>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Frames</a>
+            <RouterLink class="nav-link" :class="{ active: $route.path === '/products'}" to="/products">Products</RouterLink>
+            <!-- <a class="nav-link" href="#">Frames</a> -->
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Custom Orders</a>
@@ -27,7 +28,4 @@ import logo from "../../images/island photo logo copy.jpg"; // Update this path 
 </template>
 
 <style scoped>
-.navbar {
-    background-color: #838340;
-}
 </style>

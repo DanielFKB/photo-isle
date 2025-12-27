@@ -1,86 +1,114 @@
 <script setup>
-import { ref, onMounted } from "vue";
-
-const featuredProducts = ref([])
-const loading = ref(true)
-
-onMounted(async () => {
-    try {
-        const response = await fetch('/api/featured-products')
-        const res = await response.json();
-        featuredProducts.value = res.data;
-    } catch (error) {
-        console.error('Error fetching featured products:', error)
-        
-    } finally {
-        loading.value = false
-    }
-})
+const featuredFrames = [
+  {
+    title: "Beach Sunset",
+    image: "https://images.pexels.com/photos/207353/pexels-photo-207353.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "A vibrant frame capturing a Caribbean sunset.",
+  },
+  {
+    title: "Rustic Wood",
+    image: "https://images.pexels.com/photos/207353/pexels-photo-207353.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Natural wood texture, perfect for home decor.",
+  },
+  {
+    title: "Black Minimal",
+    image: "https://images.pexels.com/photos/207353/pexels-photo-207353.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Sleek and modern frame design.",
+  },
+];
 </script>
 
 <template>
-    <!-- <div class="px-4 py-5 my-5 text-center bg-body-tertiary rounded-3">
-        <img class="img-fluid" :src="UWIWordmark" alt="UWI Wordmark" width="300" />
-        <h1 class="display-5 fw-bold text-body-emphasis">Welcome</h1>
-        <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">You've successfully loaded up the Laravel and VueJS starter template for this assignment.</p>
-        </div>
-    </div> -->
-<div class="container mx-auto p-6">
+  <div class="demon">
+    <!-- Navbar -->
+    
+
     <!-- Hero Section -->
-    <section class="text-center py-20 bg-gray-100 rounded-xl shadow-lg">
-      <h1 class="text-5xl font-bold text-gray-800">Capture & Frame Your Memories</h1>
-      <p class="mt-4 text-lg text-gray-600">High-quality photo prints, canvas, and custom frames.</p>
-      <RouterLink to="/shop">
-        <button class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700">
-          Shop Now
-        </button>
-      </RouterLink>
+    <section class="py-5 text-center hero">
+      <div class="container">
+        <h1 class="display-4 fw-bold">Frame Your Favorite Moments</h1>
+        <p class="lead">Premium frames, canvas prints, and photo gifts delivered to your door.</p>
+        <RouterLink class=" btn btn-dark btn-lg mt-3" :class="{ active: $route.path === '/products'}" to="/products">Browse Frames</RouterLink>
+      </div>
     </section>
 
-    <!-- Featured Prints -->
-    <section class="mt-16">
-      <h2 class="text-3xl font-semibold text-gray-800 mb-6">Featured Prints</h2>
-      <div v-if="loading" class="text-center">Loading...</div>
-      <div v-else class="grid md:grid-cols-3 gap-6">
-        <div v-if="featuredProducts.length > 0">
-          <div v-for="product in featuredProducts" :key="product.id" class="bg-white p-4 shadow-lg rounded-lg">
-            <img :src="product.image" :alt="product.name" class="w-full h-64 object-cover rounded-lg">
-            <h3 class="mt-4 text-lg font-semibold">{{ product.name }}</h3>
-            <p class="text-gray-600">{{ product.price }} USD</p>
-            <RouterLink :to="`/product/${product.id}`">
-              <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                View Details
-              </button>
-            </RouterLink>
+    <!-- Product Categories -->
+    <!-- <section class="py-5">
+      <div class="container">
+        <div class="row g-4 text-center">
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow">
+              <img src="https://via.placeholder.com/300x200?text=Ready-made+Frames" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">Ready-made Frames</h5>
+                <p class="card-text">Beautiful pre-designed frames for all occasions.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow">
+              <img src="https://via.placeholder.com/300x200?text=Canvas+Prints" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">Canvas Prints</h5>
+                <p class="card-text">Turn your favorite photos into wall art.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow">
+              <img src="https://via.placeholder.com/300x200?text=Custom+Orders" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">Custom Frames</h5>
+                <p class="card-text">Build a frame to match your unique style and size.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <p v-else>No featured products available.</p>
+      </div>
+    </section> -->
+
+    <section class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4 fw-bold">Featured Frames</h2>
+        <div class="row g-4">
+          <div class="col-md-4" v-for="(frame, index) in featuredFrames" :key="index">
+            <div class="card h-100 shadow-sm border-0">
+              <img :src="frame.image" class="card-img-top" :alt="frame.title" />
+              <div class="card-body">
+                <h5 class="card-title">{{ frame.title }}</h5>
+                <p class="card-text">{{ frame.description }}</p>
+                <a href="#" class="btn btn-outline-dark">View Frame</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="mt-16 bg-gray-100 p-10 rounded-xl shadow-lg">
-      <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">How It Works</h2>
-      <div class="grid md:grid-cols-3 gap-6 text-center">
-        <div>
-          <h3 class="text-xl font-semibold">1. Upload Your Photo</h3>
-          <p class="text-gray-600">Choose a high-quality image for printing.</p>
-        </div>
-        <div>
-          <h3 class="text-xl font-semibold">2. Select Frame & Size</h3>
-          <p class="text-gray-600">Pick a frame style and dimensions.</p>
-        </div>
-        <div>
-          <h3 class="text-xl font-semibold">3. Get It Delivered</h3>
-          <p class="text-gray-600">Receive your framed photo at your doorstep.</p>
-        </div>
-      </div>
-    </section>
-</div>
+<section class="py-5 text-center bg-dark text-white">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Need Something Unique?</h2>
+    <p class="lead mb-4">Design your own frame to match your photo, size, and vibe.</p>
+    <RouterLink to="/custom-order" class="btn btn-warning btn-lg fw-semibold">
+      Get a Custom Frame
+    </RouterLink>
+  </div>
+</section>
 
+    <!-- Footer -->
+    <!-- <footer class="py-4 bg-dark text-white text-center">
+      <div class="container">
+        <p class="mb-0">© 2025 Island Photo. All rights reserved.</p>
+      </div>
+    </footer> -->
+  </div>
 </template>
 
 <style scoped>
-
+.hero {
+  background-image: url("https://images.pexels.com/photos/4534200/pexels-photo-4534200.jpeg?auto=compress&cs=tinysrgb&w=600");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
 </style>
